@@ -21,16 +21,25 @@ class TranslatorAPI:
         """
         Traduce los elementos de la interfaz al idioma especificado.
 
-        :param language: Código de idioma al cual traducir los elementos de la interfaz.
+        :param language: Códidgo de idioma al cual traducir los elementos de la interfaz.
         :return: Diccionario con los elementos traducidos.
         """
-        return {
-            "title": self.translate_text("🤖 SapiensBot", language),
-            "description": self.translate_text("Welcome to this chatbot based on GPT-3.5 Turbo. Ask me anything and I will help you with useful and accurate answers.", language),
-            "input_label": self.translate_text("Input", language),
-            "input_placeholder": self.translate_text("Type your message here...", language),
-            "button_text": self.translate_text("Send", language),
-            "output_label": self.translate_text("Output", language),
-            "output_placeholder": self.translate_text("The response will appear here...", language),
-            "examples_label": self.translate_text("Ex", language),
-        }
+        interface_elements = {
+        "title": "SapiensBot",  # No es necesario traducir el nombre del bot
+        "description": "Welcome to SapiensBot. Ask me anything you want and I will help you with useful and accurate answers.",
+        "input_placeholder": "Type your message here...",
+        "button_text": "Send",
+        "output_placeholder": "The response will appear here...",
+        "video_recommended_label": "YouTube Recommended Video",  # Nuevo: Traducción para "Video YouTube Recomendado"
+        "video_related_label": "Content Related Video",  # Nuevo: Traducción para "Video Relacionado al Contenido"
+        "export_button": "Export to PDF",
+        "input_label": "Input",  # Agregamos input_label si necesario
+        "output_label": "Output",  # Agregamos output_label si necesario
+    }
+
+        # Traducir todos los valores excepto el título
+        for key, value in interface_elements.items():
+            if key != "title":
+                interface_elements[key] = self.translate_text(value, language)
+
+        return interface_elements
